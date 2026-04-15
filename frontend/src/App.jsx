@@ -174,15 +174,16 @@ export default function App() {
   }, [])
 
   // ── Google 로그인 ──
-  const handleLogin = async () => {
-    try {
-      const res  = await fetch(`${API_URL}/auth/login`)
-      const data = await res.json()
-      window.location.href = data.auth_url
-    } catch {
-      alert('로그인 중 오류가 발생했습니다.')
-    }
+  // 이 부분만 교체
+const handleLogin = async () => {
+  try {
+    const res  = await fetch(`${API_URL}/auth/login`)
+    const data = await res.json()
+    window.location.href = data.auth_url
+  } catch {
+    alert('로그인 중 오류가 발생했습니다.')
   }
+}
 
   // ── 로그아웃 ──
   const handleLogout = () => {
