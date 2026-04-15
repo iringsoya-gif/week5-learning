@@ -17,3 +17,7 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# backend/app/core/database.py 맨 아래에 추가
+def create_tables():
+    Base.metadata.create_all(bind=engine)
