@@ -176,7 +176,7 @@ export default function App() {
   // ── Google 로그인 ──
   const handleLogin = async () => {
     try {
-      const res  = await fetch(`${API_URL}/auth/google`)
+      const res  = await fetch(`${API_URL}/auth/login`)
       const data = await res.json()
       window.location.href = data.auth_url
     } catch {
