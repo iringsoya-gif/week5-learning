@@ -5,16 +5,11 @@ from app.api.routes import auth, payment
 
 app = FastAPI(title="Week5 Learning API")
 
-# ── CORS 설정 ──
+# ── CORS 설정 (전체 허용) ──
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "https://week5-learning.vercel.app",
-    ],
-    allow_origin_regex="https://week5-learning-.*\\.vercel\\.app",
-    allow_credentials=True,
+    allow_origins=["*"],        # 모든 URL 허용
+    allow_credentials=False,    # allow_origins=["*"] 일 때 반드시 False
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -23,7 +18,7 @@ app.add_middleware(
 app.include_router(auth.router,    prefix="/api/v1/auth",    tags=["인증"])
 app.include_router(payment.router, prefix="/api/v1/payment", tags=["결제"])
 
-# ── 시작 시 DB 테이블 생성 ──
+# ── 시작 시 DB 테이블 자동 생성 ──
 @app.on_event("startup")
 def startup():
     create_tables()
